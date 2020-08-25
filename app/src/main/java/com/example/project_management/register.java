@@ -50,7 +50,7 @@ String userid;
         fstore=FirebaseFirestore.getInstance();
         if(mAuth.getCurrentUser() != null)
         {
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            Toast.makeText(register.this,"USER ALREADY EXISTS",Toast.LENGTH_LONG).show();
             finish();
         }
         mtxtlogin.setOnClickListener(new View.OnClickListener() {
