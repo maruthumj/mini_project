@@ -18,11 +18,11 @@ FirebaseAuth mauth;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mauth=FirebaseAuth.getInstance();
-        if(mauth.getCurrentUser() == null)
+        /*if(mauth.getCurrentUser() == null)
         {
             startActivity(new Intent(getApplicationContext(),register.class));
             finish();
-        }
+        }*/
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);

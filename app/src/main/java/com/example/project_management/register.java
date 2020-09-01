@@ -21,7 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.proto.TargetGlobal;
+
 
 
 import java.util.*;
@@ -48,11 +48,7 @@ String userid;
         mAuth=FirebaseAuth.getInstance();
         mtxtlogin=findViewById(R.id.txtlogin);
         fstore=FirebaseFirestore.getInstance();
-        if(mAuth.getCurrentUser() != null)
-        {
-            Toast.makeText(register.this,"USER ALREADY EXISTS",Toast.LENGTH_LONG).show();
-            finish();
-        }
+
         mtxtlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,7 +91,7 @@ String userid;
                         if(task.isSuccessful())
                         {
                             Toast.makeText(register.this,"User Created",Toast.LENGTH_LONG).show();
-                            //mAuth.getCurrentUser().getUid();
+
                             userid=mAuth.getCurrentUser().getUid();
                             DocumentReference docref=fstore.collection("users").document(userid);
                             final Map<String,Object> user=new HashMap<>();
@@ -114,7 +110,6 @@ String userid;
                         {
                              Toast.makeText(register.this,"Error !"+task.getException().getMessage(),Toast.LENGTH_LONG).show();
                              mprogressBar.setVisibility(View.GONE);
-
                         }
                     }
                 });

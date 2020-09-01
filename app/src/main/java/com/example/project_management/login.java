@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -33,6 +34,7 @@ ProgressBar lprogbar2;
       lsigninbtn=findViewById(R.id.loginbtn);
       lprogbar2=findViewById(R.id.progbar2);
       lsignupbtn=findViewById(R.id.txtlogin2);
+
 fAuth=FirebaseAuth.getInstance();
       lsignupbtn.setOnClickListener(new View.OnClickListener() {
           @Override
@@ -68,7 +70,11 @@ fAuth=FirebaseAuth.getInstance();
                            if(task.isSuccessful())
                            {
                                Toast.makeText(login.this,"Logged in successfully",Toast.LENGTH_SHORT).show();
+
                               startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                             lemailid.getText().clear();
+                              lpassword.getText().clear();
+
                            }
                            else
                            {
@@ -78,6 +84,9 @@ fAuth=FirebaseAuth.getInstance();
                   }
               });
           }
+
       });
+
     }
-}
+
+    }
