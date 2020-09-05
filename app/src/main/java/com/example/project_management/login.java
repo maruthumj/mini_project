@@ -70,23 +70,17 @@ fAuth=FirebaseAuth.getInstance();
                            if(task.isSuccessful())
                            {
                                Toast.makeText(login.this,"Logged in successfully",Toast.LENGTH_SHORT).show();
-
                               startActivity(new Intent(getApplicationContext(),MainActivity.class));
                              lemailid.getText().clear();
                               lpassword.getText().clear();
-
                            }
                            else
                            {
                                Toast.makeText(login.this,"Error !"+task.getException().getMessage(),Toast.LENGTH_LONG).show();
-
                            }
                   }
               });
           }
-
       });
-
     }
-
     }
