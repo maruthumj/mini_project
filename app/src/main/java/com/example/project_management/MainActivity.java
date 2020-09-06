@@ -1,5 +1,6 @@
 package com.example.project_management;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -10,19 +11,17 @@ import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
-FirebaseAuth mauth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mauth=FirebaseAuth.getInstance();
-        if(mauth.getCurrentUser() == null)
-        {
-            startActivity(new Intent(getApplicationContext(),login.class));
-            finish();
-        }
+
+
+
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);

@@ -1,12 +1,23 @@
 package com.example.project_management;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
+import java.lang.String;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.auth.User;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +25,7 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class profile extends Fragment {
+    TextView name,email,phonenum;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -55,10 +67,32 @@ public class profile extends Fragment {
         }
     }
 
+    //FirebaseFirestore fstore;
+    //FirebaseAuth fauth;
+    //String userid;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+
+        View v= inflater.inflate(R.layout.fragment_profile, container, false);
+        /*name = (TextView) v.findViewById(R.id.name1);
+        email = (TextView) v.findViewById(R.id.email1);
+        phonenum = (TextView) v.findViewById(R.id.phone1);
+        fauth = FirebaseAuth.getInstance();
+        fstore = FirebaseFirestore.getInstance();
+        userid = fauth.getCurrentUser().getUid();
+        DocumentReference docref = fstore.collection("users").document(userid);
+        docref.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                phonenum.setText(DocumentSnapshot.getString("phone"));
+                email.setText(DocumentSnapshot.getString("email"));
+                name.setText(DocumentSnapshot.getString("fname"));
+            }
+        });*/
+        return v;
     }
+
 }

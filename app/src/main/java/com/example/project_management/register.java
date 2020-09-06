@@ -39,6 +39,10 @@ String userid;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+         accountregister();
+    }
+    public void accountregister()
+    {
         mname=findViewById(R.id.fname);
         mpassword1=findViewById(R.id.password1);
         mphone=findViewById(R.id.phonenum);
@@ -59,11 +63,11 @@ String userid;
         mbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String email=memail.getText().toString().trim();
+                String email=memail.getText().toString().trim();
                 String password=mpassword1.getText().toString().trim();
                 String cpassword=mconfpassword1.getText().toString().trim();
-                final String fullname=mname.getText().toString();
-                final String phonenum=mphone.getText().toString();
+                String fullname=mname.getText().toString();
+                String phonenum=mphone.getText().toString();
                 if(TextUtils.isEmpty(email))
                 {
                     memail.setError("Email is Required");
@@ -78,14 +82,14 @@ String userid;
                 {
 
                     mpassword1.setError("Password must be greater than 6 characters");
-                return;
+                    return;
                 }
                 if(!cpassword.equals(password))
                 {
                     mconfpassword1.setError("Passwords are not matching!");
                     return;
                 }
-               mprogressBar.setVisibility(View.VISIBLE);
+                mprogressBar.setVisibility(View.VISIBLE);
                 mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -109,8 +113,8 @@ String userid;
                         }
                         else
                         {
-                             Toast.makeText(register.this,"Error !"+task.getException().getMessage(),Toast.LENGTH_LONG).show();
-                             mprogressBar.setVisibility(View.GONE);
+                            Toast.makeText(register.this,"Error !"+task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                            mprogressBar.setVisibility(View.GONE);
                         }
                     }
                 });

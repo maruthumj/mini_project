@@ -2,7 +2,8 @@ package com.example.project_management;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -17,14 +18,15 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class login extends AppCompatActivity {
 EditText lemailid,lpassword;
 Button lsigninbtn;
-TextView lsignupbtn;
+TextView lsignupbtn,forgotpassword;
 ProgressBar lprogbar2;
     FirebaseAuth fAuth;
+
+    FirebaseAuth.AuthStateListener mAuthListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +36,30 @@ ProgressBar lprogbar2;
       lsigninbtn=findViewById(R.id.loginbtn);
       lprogbar2=findViewById(R.id.progbar2);
       lsignupbtn=findViewById(R.id.txtlogin2);
+      forgotpassword=findViewById(R.id.forgot);
+        fAuth=FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener(){
+            @Override
+            public  void  onAuthStateChanged(@NonNull FirebaseAuth mauth){
 
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if(user!=null){
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+
+
+        };
+        forgotpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), forgotpassword.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 fAuth=FirebaseAuth.getInstance();
       lsignupbtn.setOnClickListener(new View.OnClickListener() {
           @Override
