@@ -5,6 +5,11 @@
         android:id="@+id/main"
         android:title="Home"
         android:icon="@drawable/ic_home" />
+    <item
+        android:id="@+id/search_bar"
+        android:title="Search"
+        android:icon="@drawable/ic_baseline_search_24"/>
+
     <item android:title="Notification"
         android:id="@+id/notification"
         android:icon="@drawable/ic_baseline_notifications_active_24"/>
