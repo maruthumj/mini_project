@@ -14,7 +14,12 @@
         <activity android:name=".notification"></activity>
         <activity android:name=".profile" />
         <activity android:name=".search" />
-        <activity android:name=".forgotpassword" />
+        <activity android:name=".forgotpassword"
+            android:parentActivityName="com.example.project_management.login" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.project_management.login" />
+        </activity>
         <activity android:name=".register" />
         <activity android:name=".MainActivity">
             <intent-filter>

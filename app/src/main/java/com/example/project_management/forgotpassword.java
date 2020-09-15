@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 public class forgotpassword extends AppCompatActivity {
 
 
@@ -36,7 +38,8 @@ public class forgotpassword extends AppCompatActivity {
         //actionBar.setDisplayHomeAsUpEnabled(true);
         Button resetPasswordSendEmailButton = (Button) findViewById(R.id.sendemail);
         editTextTextEmailAddress = (EditText) findViewById(R.id.et);
-
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Forgot Password");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
