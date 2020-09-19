@@ -28,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 public class profile extends AppCompatActivity {
 private Button logout;
@@ -52,6 +53,13 @@ String userid;
          profilepicedit=(ImageView)findViewById(R.id.propicedit);
         logout=(Button) findViewById(R.id.btn);
         userid=fauth.getCurrentUser().getUid();
+        StorageReference profileref=storagereference.child("users/"+fauth.getCurrentUser().getUid()+"/profile.jpg");
+         profileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+             @Override
+             public void onSuccess(Uri uri) {
+                 Picasso.get().load(uri).into(profileimage);
+             }
+         });
         profilepicedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,7 +125,7 @@ String userid;
         {
             if(resultCode== Activity.RESULT_OK){
                 Uri imageuri=data.getData();
-                profileimage.setImageURI(imageuri);
+                //profileimage.setImageURI(imageuri);
                 uploadImageToFirebase(imageuri);
             }
         }
@@ -131,11 +139,17 @@ String userid;
                 fileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        
+
                     }
                 });
             Toast.makeText(profile.this,"Image Uploaded",Toast.LENGTH_SHORT).show();
+            fileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Picasso.get().load(uri).into(profileimage);
 
+                }
+            });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
