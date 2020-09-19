@@ -133,7 +133,7 @@ String userid;
                     public void onSuccess(Uri uri) {
                         
                     }
-                })
+                });
             Toast.makeText(profile.this,"Image Uploaded",Toast.LENGTH_SHORT).show();
 
             }
