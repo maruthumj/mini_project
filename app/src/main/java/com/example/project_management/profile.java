@@ -53,7 +53,7 @@ String userid;
          profilepicedit=(ImageView)findViewById(R.id.propicedit);
         logout=(Button) findViewById(R.id.btn);
         userid=fauth.getCurrentUser().getUid();
-        StorageReference profileref=storagereference.child("users/"+fauth.getCurrentUser().getUid()+"/profile.jpg");
+        StorageReference profileref=storagereference.child("users"+fauth.getCurrentUser().getUid()+"/profile.jpg");
          profileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
              @Override
              public void onSuccess(Uri uri) {
@@ -132,7 +132,7 @@ String userid;
     }
     private void uploadImageToFirebase(Uri imageuri)
     {
-        StorageReference fileref=storagereference.child("profile.jpg");
+        StorageReference fileref=storagereference.child("users"+fauth.getCurrentUser().getUid()+"/profile.jpg");
         fileref.putFile(imageuri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

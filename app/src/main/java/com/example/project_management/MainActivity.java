@@ -83,32 +83,5 @@ return false;
 
 
 
-public void BottomNavigation()
-{
 
-
-
-}
-   /* public void FirestoreProfileData() {
-        fstore = FirebaseFirestore.getInstance();
-        userid = fauth.getCurrentUser().getUid();
-        profile prof=new profile();
-        Bundle b1=new Bundle();
-        FragmentManager manager = getSupportFragmentManager();
-        DocumentReference docref = fstore.collection("users").document(userid);
-        docref.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                String name, phone, email;
-                assert value != null;
-                name = value.getString("name");
-                phone = value.getString("phone");
-                email = value.getString("email");
-                b1.putString("name2", name);
-                b1.putString("phone2", phone);
-                b1.putString("email2", email);
-                prof.setArguments(b1);
-            }
-        });
-    }*/
 }
