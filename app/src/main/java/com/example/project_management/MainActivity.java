@@ -69,7 +69,7 @@ return false;
     {
        super.onStart();
         FirebaseUser muser=fauth.getCurrentUser();
-        if(muser != null)
+        if(muser!= null)
         {
 
         }

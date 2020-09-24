@@ -12,6 +12,8 @@ import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -32,10 +35,11 @@ import com.squareup.picasso.Picasso;
 
 public class profile extends AppCompatActivity {
 private Button logout;
+CheckBox verifyemail,verifyphone;
 FirebaseAuth fauth;
 FirebaseFirestore fstore;
 TextView name1,number1,email1;
-ImageView profileimage,profilepicedit;
+ImageView profileimage,profilepicedit,done1,done2;
 
 StorageReference storagereference;
 String userid;
@@ -43,9 +47,13 @@ String userid;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        done1=(ImageView) findViewById(R.id.done1);
+        done2=(ImageView) findViewById(R.id.done2);
         storagereference= FirebaseStorage.getInstance().getReference();
          fauth=FirebaseAuth.getInstance();
          fstore=FirebaseFirestore.getInstance();
+         verifyphone=(CheckBox) findViewById(R.id.confirmphone);
+         verifyemail=(CheckBox) findViewById(R.id.confirmemail);
          email1=(TextView) findViewById(R.id.email);
          number1=(TextView) findViewById(R.id.number);
          name1=(TextView) findViewById(R.id.name);
@@ -53,7 +61,16 @@ String userid;
          profilepicedit=(ImageView)findViewById(R.id.propicedit);
         logout=(Button) findViewById(R.id.btn);
         userid=fauth.getCurrentUser().getUid();
+        FirebaseUser fuser=fauth.getCurrentUser();
+        Intent intent1=getIntent();
+        String value=intent1.getStringExtra("value");
+        if(value.equals("success"))
+        {
+            verifyphone.setVisibility(View.GONE);
+            done1.setVisibility(View.VISIBLE);
+        }
         StorageReference profileref=storagereference.child("users"+fauth.getCurrentUser().getUid()+"/profile.jpg");
+
          profileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
              @Override
              public void onSuccess(Uri uri) {
@@ -68,6 +85,40 @@ String userid;
 
             }
         });
+        verifyemail.setVisibility(View.VISIBLE);
+          verifyemail.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                  fuser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                      @Override
+                      public void onSuccess(Void aVoid) {
+                          Toast.makeText(profile.this,"Verification Email has been sent", Toast.LENGTH_SHORT).show();
+
+                      }
+                  }).addOnFailureListener(new OnFailureListener() {
+                      @Override
+                      public void onFailure(@NonNull Exception e) {
+                          Toast.makeText(profile.this,"Email not sent"+e.getMessage(),Toast.LENGTH_LONG).show();
+                      }
+                  });
+              }
+          });
+          verifyphone.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                  Intent intent=new Intent(getApplicationContext(),otp.class);
+                  String number1val=number1.getText().toString();
+                  intent.putExtra("emailval",number1val);
+                  startActivity(intent);
+
+              }
+          });
+          if(fuser.isEmailVerified())
+          {
+              Toast.makeText(profile.this,"Email verified!",Toast.LENGTH_SHORT).show();
+              verifyemail.setVisibility(View.GONE);
+              done2.setVisibility(View.VISIBLE);
+          }
 
         DocumentReference documentReference=fstore.collection("users").document(userid);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
@@ -82,8 +133,7 @@ String userid;
                  @Override
                  public void onClick(View v) {
                    fauth.signOut();
-                     Intent intent = new Intent(getApplicationContext(), login.class);
-                     startActivity(intent);
+                    startActivity(new Intent(getApplicationContext(),login.class));
                      finish();
                  }
              });

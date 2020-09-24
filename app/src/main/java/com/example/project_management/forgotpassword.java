@@ -34,13 +34,14 @@ public class forgotpassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgotpassword);
         //ActionBar actionBar = getActionBar();
-
         //actionBar.setDisplayHomeAsUpEnabled(true);
+        Intent intent=getIntent();
+        String val=intent.getStringExtra("emailval");
         Button resetPasswordSendEmailButton = (Button) findViewById(R.id.sendemail);
         editTextTextEmailAddress = (EditText) findViewById(R.id.et);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Forgot Password");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        editTextTextEmailAddress.setText(val);
         firebaseAuth = FirebaseAuth.getInstance();
 
         resetPasswordSendEmailButton.setOnClickListener(new View.OnClickListener() {

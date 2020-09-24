@@ -56,6 +56,8 @@ ProgressBar lprogbar2;
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), forgotpassword.class);
+                String emailval=lemailid.getText().toString();
+                intent.putExtra("emailval",emailval);
                 startActivity(intent);
                 finish();
             }

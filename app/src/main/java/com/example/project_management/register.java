@@ -116,7 +116,7 @@ String userid;
                         else
                         {
                             Toast.makeText(register.this,"Error !"+task.getException().getMessage(),Toast.LENGTH_LONG).show();
-                            mprogressBar.setVisibility(View.GONE);
+                            mprogressBar.setVisibility(View.INVISIBLE);
                         }
                     }
                 });
