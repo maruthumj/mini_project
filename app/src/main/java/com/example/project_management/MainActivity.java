@@ -68,8 +68,8 @@ return false;
     protected void onStart()
     {
        super.onStart();
-        FirebaseUser fuser=fauth.getCurrentUser();
-        if(fuser != null)
+        FirebaseUser muser=fauth.getCurrentUser();
+        if(muser != null)
         {
 
         }

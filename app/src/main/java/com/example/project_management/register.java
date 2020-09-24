@@ -107,14 +107,11 @@ String userid;
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Log.d("TAG","onSuccess: User Profile is created for"+userid);
-
+                                    startActivity(new Intent(getApplicationContext(),login.class));
                                 }
                             });
                            // startActivity(new Intent(getApplicationContext(),confirm_mail.class));
-                            Intent intent = new Intent(getApplicationContext(), confirm_mail.class);
-                            intent.putExtra("emailid",memail.getText().toString());
-                            startActivity(intent);
-                            finish();
+
                         }
                         else
                         {
