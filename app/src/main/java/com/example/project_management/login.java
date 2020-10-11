@@ -25,6 +25,7 @@ Button lsigninbtn;
 TextView lsignupbtn,forgotpassword;
 ProgressBar lprogbar2;
     FirebaseAuth fAuth;
+    FirebaseUser fuser;
 
     FirebaseAuth.AuthStateListener mAuthListener;
     @Override
@@ -38,6 +39,7 @@ ProgressBar lprogbar2;
       lsignupbtn=findViewById(R.id.txtlogin2);
       forgotpassword=findViewById(R.id.forgot);
         fAuth=FirebaseAuth.getInstance();
+        fuser=fAuth.getCurrentUser();
         mAuthListener = new FirebaseAuth.AuthStateListener(){
             @Override
             public  void  onAuthStateChanged(@NonNull FirebaseAuth mauth){
@@ -96,11 +98,19 @@ fAuth=FirebaseAuth.getInstance();
                   public void onComplete(@NonNull Task<AuthResult> task) {
                            if(task.isSuccessful())
                            {
-                               Toast.makeText(login.this,"Logged in successfully",Toast.LENGTH_SHORT).show();
-                              startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                             lemailid.getText().clear();
-                              lpassword.getText().clear();
+                               if(fAuth.getCurrentUser().isEmailVerified()) {
+
+                                   Toast.makeText(login.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
+                                   startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                   lemailid.getText().clear();
+                                   lpassword.getText().clear();
+                                   finish();
+                               }
+                               else{
+                                   Toast.makeText(login.this,"Please Verify Your Email adddress",Toast.LENGTH_LONG).show();
+                               }
                            }
+
                            else
                            {
                                Toast.makeText(login.this,"Error !"+task.getException().getMessage(),Toast.LENGTH_LONG).show();

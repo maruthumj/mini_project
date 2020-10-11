@@ -6,30 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".profile">
 
-    <CheckBox
-        android:id="@+id/confirmphone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Verify"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.316" />
-
-    <CheckBox
-        android:id="@+id/confirmemail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Verify"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.903"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.398" />
-
     <TextView
         android:id="@+id/email"
         android:layout_width="244dp"
@@ -151,31 +127,5 @@
         app:layout_constraintVertical_bias="0.433"
         app:srcCompat="@drawable/ic_baseline_email_24"
         tools:ignore="VectorDrawableCompat" />
-
-    <ImageView
-        android:id="@+id/done1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.801"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.323"
-        app:srcCompat="@drawable/ic_baseline_done_outline_24" />
-
-    <ImageView
-        android:id="@+id/done2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.801"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.404"
-        app:srcCompat="@drawable/ic_baseline_done_outline_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
