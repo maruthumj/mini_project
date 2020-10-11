@@ -55,16 +55,7 @@ CountryCodePicker codePicker;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        Bundle bundle=getIntent().getExtras();
-        if(bundle != null)
-        {
-            String data=bundle.getString("data");
-            if(data.equals("1"))
-            {
-                phoneverify.setVisibility(View.GONE);
-                emailverify.setVisibility(View.VISIBLE);
-            }
-        }
+
 
 
         mname=findViewById(R.id.fname);
@@ -125,10 +116,18 @@ CountryCodePicker codePicker;
         phoneverify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),otp.class));
+
+                Intent intent = new Intent(getApplicationContext(), otp.class);
+                String phoneval="+"+codePicker.getSelectedCountryCode()+mphone.getText().toString();
+                intent.putExtra("phoneval",phoneval);
+                startActivity(intent);
                 finish();
-            }
+
+
+
+                }
         });
+
 
         mbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,3 +201,18 @@ CountryCodePicker codePicker;
 
         }
 
+
+        /*
+          if(bundle != null)
+                {
+                    int data=bundle.getInt("data");
+                    if(data == 1)
+                    {
+                        phoneverify.setVisibility(View.GONE);
+                        emailverify.setVisibility(View.VISIBLE);
+                    }
+                    else {
+
+                    }
+                    }
+         */
