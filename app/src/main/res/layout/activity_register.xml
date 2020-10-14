@@ -158,29 +158,16 @@
         app:layout_constraintVertical_bias="0.628" />
 
     <Button
-        android:id="@+id/emailverify"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="verify email"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.821" />
-
-    <Button
         android:id="@+id/verifyphone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="verify phone"
+        android:text="Vrify Email and Phone"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.713" />
+        app:layout_constraintVertical_bias="0.793" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

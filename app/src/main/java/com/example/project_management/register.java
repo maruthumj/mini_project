@@ -38,14 +38,14 @@ import java.util.concurrent.TimeUnit;
 public class register extends AppCompatActivity {
     private Handler mhandler=new Handler();
 EditText mname,mpassword1,otpnum,mphone,memail,mconfpassword1;
-Button mbtn,phoneverify,emailverify,nextbtn;
+Button mbtn,phoneverify,nextbtn;
 ProgressBar mprogressBar;
 FirebaseAuth mAuth;
 TextView mtxtlogin;
 FirebaseUser fuser;
 FirebaseFirestore fstore;
 String userid;
-
+String emailval;
 CountryCodePicker codePicker;
 
     @Override
@@ -68,11 +68,8 @@ CountryCodePicker codePicker;
         mtxtlogin=findViewById(R.id.txtlogin);
         fstore=FirebaseFirestore.getInstance();
         codePicker=(CountryCodePicker) findViewById(R.id.ccp);
-        emailverify=(Button) findViewById(R.id.emailverify);
+
         phoneverify=(Button) findViewById(R.id.verifyphone);
-
-
-
 
 
 
@@ -91,41 +88,41 @@ CountryCodePicker codePicker;
             }
         });
 
-        emailverify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.getCurrentUser().sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
-                   @Override
-                   public void onSuccess(Void aVoid) {
-                       Toast.makeText(register.this,"Email Verification has been sent",Toast.LENGTH_SHORT).show();
-
-                           startActivity(new Intent(getApplicationContext(),login.class));
-                           finish();
-                   }
-               }).addOnFailureListener(new OnFailureListener() {
-                   @Override
-                   public void onFailure(@NonNull Exception e) {
-                       Toast.makeText(register.this,"Email not sent"+e.getMessage(),Toast.LENGTH_LONG).show();
-                   }
-               });
-            }
 
 
-        });
+
+
 
         phoneverify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getApplicationContext(), otp.class);
-                String phoneval="+"+codePicker.getSelectedCountryCode()+mphone.getText().toString();
-                intent.putExtra("phoneval",phoneval);
-                startActivity(intent);
-                finish();
+                mAuth.getCurrentUser().sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(register.this,"Email Verification has been sent",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), otp.class);
+                        String phoneval="+"+codePicker.getSelectedCountryCode()+mphone.getText().toString();
+
+                        intent.putExtra("phoneval",phoneval);
+
+                        startActivity(intent);
+                        finish();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(register.this,"Email not sent"+e.getMessage(),Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
 
 
 
-                }
+
+
+
         });
 
 
@@ -202,17 +199,3 @@ CountryCodePicker codePicker;
         }
 
 
-        /*
-          if(bundle != null)
-                {
-                    int data=bundle.getInt("data");
-                    if(data == 1)
-                    {
-                        phoneverify.setVisibility(View.GONE);
-                        emailverify.setVisibility(View.VISIBLE);
-                    }
-                    else {
-
-                    }
-                    }
-         */

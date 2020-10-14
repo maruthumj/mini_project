@@ -13,7 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".otp"></activity>
+        <activity android:name=".otp"
+                  android:parentActivityName=".register"
+            >
+        </activity>
         <activity android:name=".notification" />
         <activity android:name=".profile" />
         <activity android:name=".search" />

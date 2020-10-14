@@ -51,8 +51,6 @@ ProgressBar lprogbar2;
                     finish();
                 }
             }
-
-
         };
         forgotpassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +60,7 @@ ProgressBar lprogbar2;
                 intent.putExtra("emailval",emailval);
                 startActivity(intent);
                 finish();
+
             }
         });
 fAuth=FirebaseAuth.getInstance();

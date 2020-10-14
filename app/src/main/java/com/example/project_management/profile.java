@@ -83,8 +83,6 @@ String userid;
 
         FirebaseUser fuser=fauth.getCurrentUser();
 
-
-
         StorageReference profileref=storagereference.child("users"+fauth.getCurrentUser().getUid()+"/profile.jpg");
 
          profileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
