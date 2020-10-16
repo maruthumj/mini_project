@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
+import java.util.Objects;
+
 public class login extends AppCompatActivity {
 EditText lemailid,lpassword;
 Button lsigninbtn;
@@ -45,7 +47,7 @@ ProgressBar lprogbar2;
             public  void  onAuthStateChanged(@NonNull FirebaseAuth mauth){
 
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if(user!=null){
+                if((Objects.requireNonNull(fAuth.getCurrentUser()).isEmailVerified()) && user!=null){
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     finish();

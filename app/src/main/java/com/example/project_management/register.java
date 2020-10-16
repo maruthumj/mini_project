@@ -174,6 +174,7 @@ CountryCodePicker codePicker;
                                 public void onSuccess(Void aVoid) {
                                     Log.d("TAG","onSuccess: User Profile is created for"+userid);
                                     mbtn.setVisibility(View.GONE);
+                                    mtxtlogin.setVisibility(View.GONE);
                                     phoneverify.setVisibility(View.VISIBLE);
                                 }
                             });
