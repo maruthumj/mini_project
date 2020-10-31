@@ -164,11 +164,12 @@ CountryCodePicker codePicker;
                             Toast.makeText(register.this,"User Created",Toast.LENGTH_LONG).show();
 
                             userid=mAuth.getCurrentUser().getUid();
-                            DocumentReference docref=fstore.collection("users").document(userid);
+                            DocumentReference docref=fstore.collection("users").document(email);
                             final Map<String,Object> user=new HashMap<>();
                             user.put("fname",fullname);
                             user.put("email",email);
                             user.put("phone",phonenum);
+                            user.put("userid",userid);
                             docref.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

@@ -57,7 +57,7 @@ FirebaseFirestore fstore;
 TextView name1,number1,email1;
 ImageView profileimage,profilepicedit;
 StorageReference storagereference;
-String userid;
+String userid,email;
 
 
     @Override
@@ -80,9 +80,8 @@ String userid;
         logout=(Button) findViewById(R.id.btn);
         userid=fauth.getCurrentUser().getUid();
 
-
         FirebaseUser fuser=fauth.getCurrentUser();
-
+        email=fuser.getEmail();
         StorageReference profileref=storagereference.child("users"+fauth.getCurrentUser().getUid()+"/profile.jpg");
 
          profileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -100,22 +99,13 @@ String userid;
             }
         });
 
-
-
-
-
-
-
-
-
-
-        DocumentReference documentReference=fstore.collection("users").document(userid);
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+        DocumentReference documentReference=fstore.collection("users").document(email);
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                number1.setText(value.getString("phone"));
-                name1.setText(value.getString("fname"));
-                email1.setText(value.getString("email"));
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                name1.setText(documentSnapshot.getString("fname"));
+                email1.setText(documentSnapshot.getString("email"));
+                number1.setText(documentSnapshot.getString("phone"));
             }
         });
              logout.setOnClickListener(new View.OnClickListener() {
