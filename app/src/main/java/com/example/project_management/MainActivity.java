@@ -11,6 +11,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabItem;
@@ -24,7 +26,9 @@ public class MainActivity extends AppCompatActivity {
     FirebaseFirestore fstore;
     FirebaseAuth fauth;
     String userid;
-    PagerAdapter pagerAdapter;
+    FirebaseUser fuser;
+    PagerAdapter adapter;
+    ImageView create,ongoing,archived;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -32,32 +36,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         fauth=FirebaseAuth.getInstance();
         //FirestoreProfileData();
-        TabLayout tabLayout=findViewById(R.id.tablayout);
-        TabItem create=findViewById(R.id.create);
-        TabItem ongoing=findViewById(R.id.ongoing);
-        TabItem archived=findViewById(R.id.archived);
-        ViewPager viewPager=findViewById(R.id.viewpager);
+        fstore=FirebaseFirestore.getInstance();
+        create=(ImageView)findViewById(R.id.create);
+        ongoing=(ImageView)findViewById(R.id.ongoing);
+        archived=(ImageView)findViewById(R.id.archived);
 
-        pagerAdapter=new pagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,tabLayout.getTabCount());
-        viewPager.setAdapter(pagerAdapter);
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        create.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),create.class));
+                finish();
             }
         });
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        ongoing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),ongoing.class));
+                finish();
+            }
+        });
+        archived.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),archived.class));
+                finish();
+            }
+        });
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);

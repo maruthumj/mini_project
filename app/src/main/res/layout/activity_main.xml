@@ -2,12 +2,12 @@
 
 
 
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/proback"
     tools:context=".profile">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -25,47 +25,35 @@
         app:layout_constraintVertical_bias="1.0"
         app:menu="@menu/bottom_menu" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tablayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="285dp"
+    <ImageView
+        android:id="@+id/ongoing"
+        android:layout_width="179dp"
+        android:layout_height="140dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:srcCompat="@drawable/ongoing" />
 
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/create"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CREATE" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/ongoing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ONGOING" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/archived"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ARCHIVED" />
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="627dp"
+    <ImageView
+        android:id="@+id/archived"
+        android:layout_width="179dp"
+        android:layout_height="140dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="@+id/tablayout"
-        app:layout_constraintStart_toStartOf="@+id/tablayout"
-        app:layout_constraintTop_toBottomOf="@+id/tablayout">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ongoing"
+        app:srcCompat="@drawable/archived" />
 
-    </androidx.viewpager.widget.ViewPager>
+    <ImageView
+        android:id="@+id/create"
+        android:layout_width="179dp"
+        android:layout_height="140dp"
+        app:layout_constraintBottom_toTopOf="@+id/ongoing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/create" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

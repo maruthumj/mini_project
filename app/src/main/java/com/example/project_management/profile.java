@@ -16,11 +16,14 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,13 +55,14 @@ public class profile extends AppCompatActivity {
  Button logout;
 
 
+
 FirebaseAuth fauth;
 FirebaseFirestore fstore;
 TextView name1,number1,email1;
 ImageView profileimage,profilepicedit;
 StorageReference storagereference;
 String userid,email;
-
+Button mycolleagues1,myprojects1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +83,25 @@ String userid,email;
          profilepicedit=(ImageView)findViewById(R.id.propicedit);
         logout=(Button) findViewById(R.id.btn);
         userid=fauth.getCurrentUser().getUid();
+       mycolleagues1=(Button)findViewById(R.id.mycolleague);
+       myprojects1=(Button) findViewById(R.id.myprojects);
+
+       mycolleagues1.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               startActivity(new Intent(getApplicationContext(), mycolleagues.class));
+           }
+       });
+       myprojects1.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               startActivity(new Intent(getApplicationContext(),myprojects.class));
+           }
+       });
 
         FirebaseUser fuser=fauth.getCurrentUser();
         email=fuser.getEmail();
-        StorageReference profileref=storagereference.child("users"+fauth.getCurrentUser().getUid()+"/profile.jpg");
+        StorageReference profileref=storagereference.child("users"+fauth.getCurrentUser().getEmail()+"/profile.jpg");
 
          profileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
              @Override
@@ -98,6 +117,7 @@ String userid,email;
 
             }
         });
+
 
         DocumentReference documentReference=fstore.collection("users").document(email);
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -161,7 +181,7 @@ String userid,email;
     }
     private void uploadImageToFirebase(Uri imageuri)
     {
-        StorageReference fileref=storagereference.child("users"+fauth.getCurrentUser().getUid()+"/profile.jpg");
+        StorageReference fileref=storagereference.child("users"+fauth.getCurrentUser().getEmail()+"/profile.jpg");
         fileref.putFile(imageuri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
