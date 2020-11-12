@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".profile"
-    android:background="@drawable/proback">
+    android:background="@drawable/background2">
 
     <Button
         android:id="@+id/myprojects"

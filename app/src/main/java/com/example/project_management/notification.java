@@ -108,7 +108,7 @@ private static String TAG="TAG";
                             }
                         });
 
-// Remove the 'capital' field from the document
+
 
 
             }

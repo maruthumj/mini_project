@@ -97,20 +97,34 @@ public class search extends AppCompatActivity {
 
 
                 checkemail(v);
-           DocumentReference docref1=fstore.collection("users").document(searchuser.getText().toString());
-                     docref1.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                         @Override
-                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                             usermail.setText(documentSnapshot.getString("fname"));
-                             userphone.setText(documentSnapshot.getString("phone"));
-                         }
-                     });
+                userphone.setVisibility(View.VISIBLE);
+                username.setVisibility(View.VISIBLE);
+                profilepic.setVisibility(View.VISIBLE);
+                DocumentReference docref1=fstore.collection("users").document(searchuser.getText().toString().trim());
+                docref1.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        username.setText(documentSnapshot.getString("fname"));
+                        userphone.setText(documentSnapshot.getString("phone"));
+                    }
+                });
+                storagereference= FirebaseStorage.getInstance().getReference();
+                StorageReference profileref=storagereference.child("users"+searchuser.getText().toString()+"/profile.jpg");
+                profileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.get().load(uri).into(profilepic);
+                    }
+                });
+
 
 
             }
 
 
         });
+
+
           cardView.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View v) {
@@ -127,7 +141,11 @@ public class search extends AppCompatActivity {
                       public void onSuccess(Void aVoid) {
                           Log.d("TAG","request send successfully to"+searchuser.getText().toString());
                           Toast.makeText(getApplicationContext(),"Colleague request is sent",Toast.LENGTH_LONG).show();
-
+                          cardView.setVisibility(View.GONE);
+                          username.setVisibility(View.GONE);
+                          userphone.setVisibility(View.GONE);
+                          profilepic.setVisibility(View.GONE);
+                          searchuser.getText().clear();
                       }
                   });
               }
@@ -170,9 +188,14 @@ public class search extends AppCompatActivity {
                 if (!check) {
                     Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
                 } else {
+
                     cardView.setVisibility(View.VISIBLE);
+
+
                 }
             }
         });
+
     }
+
 }

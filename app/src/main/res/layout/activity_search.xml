@@ -6,12 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".search"
     tools:visibility="visible"
-    android:background="@drawable/proback">
+    android:background="@drawable/background2">
 
     <TextView
         android:id="@+id/userphone"
         android:layout_width="185dp"
         android:layout_height="37dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.893"
@@ -72,7 +73,7 @@
         android:layout_width="337dp"
         android:layout_height="65dp"
         android:text=" Send Request to be a Colleague"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,6 +85,7 @@
         android:id="@+id/username"
         android:layout_width="185dp"
         android:layout_height="37dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.893"
@@ -95,6 +97,7 @@
         android:id="@+id/profilepic"
         android:layout_width="113dp"
         android:layout_height="116dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.124"

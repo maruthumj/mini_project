@@ -202,7 +202,7 @@ Button mycolleagues1,myprojects1;
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(profile.this,"Failed",Toast.LENGTH_SHORT).show();;
+                Toast.makeText(profile.this,"Failed",Toast.LENGTH_SHORT).show();
 
             }
         });
