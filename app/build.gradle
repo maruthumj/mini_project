@@ -35,7 +35,7 @@ dependencies {
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 
 
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.google.firebase:firebase-auth:20.0.0'
     implementation 'com.google.firebase:firebase-firestore:22.0.0'
     implementation 'com.android.support:multidex:1.0.3'
@@ -43,7 +43,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.3.1'
     implementation 'androidx.navigation:navigation-ui:2.3.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc03"
     implementation 'com.google.firebase:firebase-storage:19.2.0'
     implementation 'org.jetbrains:annotations:15.0'
     implementation 'androidx.cardview:cardview:1.0.0'
@@ -55,5 +56,8 @@ dependencies {
     implementation 'com.github.joielechong:countrycodepicker:2.4.2'
     implementation platform('com.google.firebase:firebase-bom:25.12.0')
     implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.firebaseui:firebase-ui-firestore:7.0.0'
+    implementation 'com.firebaseui:firebase-ui-storage:7.0.0'
+    implementation 'com.firebaseui:firebase-ui-auth:7.0.0'
 
 }

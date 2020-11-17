@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -13,30 +15,41 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".myprojects"
-                  android:parentActivityName=".profile">
+        <activity android:name=".myfiles"
+            android:parentActivityName=".profile">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.project_management.profile"/>
+
+        </activity>
+        <activity
+            android:name=".myprojects"
+            android:parentActivityName=".profile">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.project_management.profile" />
         </activity>
-        <activity android:name=".archived"
+        <activity
+            android:name=".archived"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.project_management.MainActivity" />
-
         </activity>
-        <activity android:name=".ongoing" android:parentActivityName=".MainActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.example.project_management.MainActivity" />
-        </activity>
-        <activity android:name=".create"
+        <activity
+            android:name=".ongoing"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.project_management.MainActivity" />
-
+        </activity>
+        <activity
+            android:name=".create"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.project_management.MainActivity" />
         </activity>
         <activity
             android:name=".mycolleagues"

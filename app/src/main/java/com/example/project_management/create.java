@@ -11,9 +11,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,15 +48,16 @@ public class create extends AppCompatActivity {
     StorageReference storageReference;
     private DatePickerDialog.OnDateSetListener onDateSetListener;
     private DatePickerDialog.OnDateSetListener onDateSetListener1;
-    private List<String> namelist = new ArrayList<>();
+     List<String> namelist = new ArrayList<>();
     EditText pname,cname,ptask,prole,pdesc;
+    ListView lview1;
 
     Button pbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
-        TextView lview=(TextView)findViewById(R.id.lview1);
+
         fstore = FirebaseFirestore.getInstance();
         fauth = FirebaseAuth.getInstance();
         pname=(EditText)findViewById(R.id.pname);
@@ -63,6 +66,7 @@ public class create extends AppCompatActivity {
         prole=(EditText)findViewById(R.id.prole);
         cname=(EditText)findViewById(R.id.cname);
         pbtn=(Button)findViewById(R.id.pbtn);
+        lview1=(ListView)findViewById(R.id.lview1);
         storageReference = FirebaseStorage.getInstance().getReference();
         startdate = (TextView) findViewById(R.id.startdate);
         finishdate=(TextView)findViewById(R.id.finishdate);
@@ -72,14 +76,14 @@ public class create extends AppCompatActivity {
         pbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String creator="Create: "+fauth.getCurrentUser().getEmail().trim();
+                String creator="Creator: "+ Objects.requireNonNull(fauth.getCurrentUser()).getEmail();
                 String name="Project Name: "+pname.getText().toString().trim();
-                String description="Project Description: "+pdesc.getText().toString().trim();
+                String description="Project Description: "+pdesc.getText().toString();
                 String role="Role: "+prole.getText().toString().trim();
-                String colleaguename="Colleague's Name: "+cname.getText().toString().trim();
-                String task="Task Name: "+ptask.getText().toString().trim();
-                String starttime="Starting Time: "+startdate.getText().toString().trim();
-                String finisingtime="End Time: "+finishdate.getText().toString().trim();
+                String colleaguename="Colleague's Name: "+cname.getText().toString();
+                String task="Task Name: "+ptask.getText().toString();
+                String starttime="Starting Time: "+startdate.getText().toString();
+                String finisingtime="End Time: "+finishdate.getText().toString();
                 String status="Status: active";
                 if(TextUtils.isEmpty(name))
                 {
@@ -104,6 +108,7 @@ public class create extends AppCompatActivity {
                 }
 
                 final Map<String,Object> user=new HashMap<>();
+
                 user.put("name",name);
                 user.put("desc",description);
                 user.put("role",role);
@@ -120,18 +125,18 @@ public class create extends AppCompatActivity {
                 user1.put("role",role);
                 user1.put("starttime",starttime);
                 user1.put("task",task);
-                user1.put("colleaguename",colleaguename);
+                user.put("colleaguename",colleaguename);
                 user1.put("finishingtime",finisingtime);
                 user1.put("status",status);
                 user1.put("creator",creator);
 
-                fstore.collection(cname.getText().toString()+"active").document().set(user1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                fstore.collection(colleaguename+"active").document(task).set(user1).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                     }
                 });
 
-                 fstore.collection(fauth.getCurrentUser().getEmail()+"projects").document().set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                 fstore.collection(creator+"projects").document(task).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                      @Override
                      public void onComplete(@NonNull Task<Void> task) {
                          if(task.isSuccessful()){
@@ -143,18 +148,7 @@ public class create extends AppCompatActivity {
                      }
                  });
 
-                fstore.collection(Objects.requireNonNull(fauth.getCurrentUser().getEmail())).addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        for (DocumentSnapshot documentSnapshot : value) {
-                            String s = documentSnapshot.getString("colleagues");
 
-                        }
-
-
-                    }
-
-                });
                            }
         });
 
@@ -202,18 +196,30 @@ public class create extends AppCompatActivity {
             }
         };
 
-       fstore.collection(Objects.requireNonNull(fauth.getCurrentUser().getEmail())).addSnapshotListener(new EventListener<QuerySnapshot>() {
+
+        fstore.collection(Objects.requireNonNull(fauth.getCurrentUser().getEmail())).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 for(DocumentSnapshot documentSnapshot : value)
                 {
-                   String s= documentSnapshot.getString("colleagues");
-                    lview.setText(s);
+                    namelist.add(documentSnapshot.getString("colleagues"));
+
                 }
+                ArrayAdapter<String> adapter1=new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,namelist);
+                adapter1.notifyDataSetChanged();
+                lview1.setAdapter(adapter1);
+
 
             }
+
         });
 
 
+    }
+
+    @Override
+    protected void onStart() {
+
+        super.onStart();
     }
 }

@@ -12,43 +12,50 @@
 
     <EditText
         android:id="@+id/ptask"
-        android:layout_width="364dp"
-        android:layout_height="43dp"
+        android:layout_width="406dp"
+        android:layout_height="55dp"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:hint="Add task"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.765"
+        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.707" />
+        app:layout_constraintVertical_bias="0.732" />
 
     <EditText
         android:id="@+id/pdesc"
-        android:layout_width="385dp"
+        android:layout_width="406dp"
         android:layout_height="111dp"
+        android:layout_marginTop="2dp"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:hint="Project Description"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.117" />
+        app:layout_constraintTop_toBottomOf="@+id/pname"
+        app:layout_constraintVertical_bias="0.021" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/cname"
-        android:layout_width="375dp"
-        android:layout_height="43dp"
+        android:layout_width="406dp"
+        android:layout_height="55dp"
+        android:gravity="center_horizontal"
         android:hint="enter your colleague email"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.473" />
+        app:layout_constraintVertical_bias="0.519" />
 
     <Button
         android:id="@+id/pbtn"
@@ -66,17 +73,19 @@
 
     <EditText
         android:id="@+id/prole"
-        android:layout_width="371dp"
-        android:layout_height="70dp"
+        android:layout_width="406dp"
+        android:layout_height="55dp"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:hint="Assign Role"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.887"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.592" />
+        app:layout_constraintVertical_bias="0.627" />
 
     <TextView
         android:id="@+id/finishdate"
@@ -85,10 +94,10 @@
         android:text="Finish Date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.79"
+        app:layout_constraintHorizontal_bias="0.828"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.789" />
+        app:layout_constraintVertical_bias="0.827" />
 
     <TextView
         android:id="@+id/startdate"
@@ -100,32 +109,45 @@
         app:layout_constraintHorizontal_bias="0.107"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.788" />
-
-    <TextView
-        android:id="@+id/lview1"
-        android:layout_width="381dp"
-        android:layout_height="103dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.321" />
+        app:layout_constraintVertical_bias="0.827" />
 
     <EditText
         android:id="@+id/pname"
-        android:layout_width="378dp"
-        android:layout_height="45dp"
+        android:layout_width="406dp"
+        android:layout_height="55dp"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:hint="Project Name"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.757"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
+
+    <ScrollView
+        android:layout_width="370dp"
+        android:layout_height="114dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.353">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/lview1"
+                android:layout_width="match_parent"
+                android:layout_height="106dp" />
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

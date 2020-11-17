@@ -26,7 +26,7 @@ public class mycolleagues extends AppCompatActivity {
     FirebaseFirestore fstore;
     StorageReference storagereference;
     ListView listView1;
-  List<String> namelist1=new ArrayList<>();
+ private List<String> namelist1=new ArrayList<>();
 
 
     @Override

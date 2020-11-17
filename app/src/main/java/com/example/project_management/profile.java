@@ -62,7 +62,7 @@ TextView name1,number1,email1;
 ImageView profileimage,profilepicedit;
 StorageReference storagereference;
 String userid,email;
-Button mycolleagues1,myprojects1;
+Button mycolleagues1,myprojects1,files;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,17 +85,30 @@ Button mycolleagues1,myprojects1;
         userid=fauth.getCurrentUser().getUid();
        mycolleagues1=(Button)findViewById(R.id.mycolleague);
        myprojects1=(Button) findViewById(R.id.myprojects);
+       files=(Button)findViewById(R.id.files);
+
+
+       files.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               startActivity(new Intent(getApplicationContext(),myfiles.class));
+               finish();
+           }
+       });
+
 
        mycolleagues1.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                startActivity(new Intent(getApplicationContext(), mycolleagues.class));
+               finish();
            }
        });
        myprojects1.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                startActivity(new Intent(getApplicationContext(),myprojects.class));
+               finish();
            }
        });
 
